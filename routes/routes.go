@@ -21,7 +21,7 @@ func SetupRoutes(router *gin.Engine) {
 		books.GET("", controllers.GetBooks)
 		books.GET("/:id", controllers.GetBook)
 		books.POST("", controllers.CreateBook)
-		books.PUT("/:id", controllers.UpdateBook)
+		books.PATCH("/:id", controllers.UpdateBook)
 		books.DELETE("/:id", controllers.DeleteBook)
 	}
 }
