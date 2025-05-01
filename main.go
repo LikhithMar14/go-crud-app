@@ -11,16 +11,20 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main(){
-	if err:= godotenv.Load(); err != nil {
+func main() {
+	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
 	router := gin.Default()
+
+	// Configure router to handle trailing slashes
+	router.RedirectTrailingSlash = false
+
 	routes.SetupRoutes(router)
 
 	config.ConnectDB()
-	config.DB.AutoMigrate(&models.Book{})
+	config.DB.AutoMigrate(&models.Book{}, &models.User{})
 
 	port := os.Getenv("PORT")
 	if port == "" {
